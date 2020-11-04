@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html xmlns="www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>View Books</title>
+<link rel="stylesheet" href="/static/style.css" th:href="@{/style.css}">
+</head>
+
+<body style="background-color: white; text-align: -webkit-center;">
+	<div class="footer">
+		<img alt="" src="" style="width: 16%;" th:src="@{/images/Sheridan_Library.png}">
+	</div>
+	<div>
+		<div class="header" style="margin-top: 0">
+			<ul>
+				<li><a href="" th:href="@{/}">Home</a></li>
+				<li><a href="" th:href="@{/AddBook}">Add new Book</a></li>
+				<li><a href="" th:href="@{/ViewBooks?page=FullList}">View All Available Books</a></li>
+				<li><a href="" class="active" th:href="@{/ViewBooks}">Explore Book stores</a></li>
+				<li><a href="" th:href="@{/}">Search Books</a></li>
+			</ul>
+		</div>
+	</div>
+	<div style="margin-top: 65px; padding-bottom: 42px;">
+		<div th:if="${MSG}" th:class="${MSG}?(${MSG=='F'}?'Err':'Success')"
+			th:text="${MSG=='F'}?'Something went wrong':'Operation succeeded'">Notification</div>
+		<h1>Davis (Brampton) Campus Books availability</h1>
+		<div class="Main">
+			<table border="1">
+				<tr>
+					<th>ID</th>
+					<!-- <th>Book ID</th> -->
+					<th>Title</th>
+					<th>Author</th>
+					<th>Course Code</th>
+					<th>Price</th>
+					<th>Qty.</th>
+					<th>Purchase</th>
+					<th colspan="2">Action</th>
+				</tr>
+				<tr th:each="books,i : ${list}" th:if="${books.Davis_Qty}">
+					<!-- 				<td th:text="${i.count}"></td> -->
+					<td th:text="${books.BookID}"></td>
+					<td th:text="${books.Title}"></td>
+					<td th:text="${books.Author}"></td>
+					<td th:text="${books.CourseCode}"></td>
+					<td th:text="${books.Price}"></td>
+					<td th:text="${books.Davis_Qty}"></td>
+					<td><span th:if="${books.Davis_Qty=='0'}" th:text="purchase"></span> <a href=""
+						th:if="${books.Davis_Qty!='0'}"
+						th:href="@{/Purchase/{BookID}/{Campus}/{Qty}(BookID=${books.BookID},Campus='Davis_Qty',Qty=${books.Davis_Qty})}">Purchase</a></td>
+					<td><a href="" th:href="@{/edit/{id}(id=${books.BookID})}">Edit</a></td>
+					<td><a href=""
+						th:href="@{/Delete/{BookID}/{Campus}(BookID=${books.BookID},Campus='Davis_Qty')}">Delete</a></td>
+				</tr>
+			</table>
+		</div>
+		<hr>
+		<h1>HMC (Mississauga) Campus Books availability</h1>
+		<div class="Main">
+			<table border="1">
+				<tr>
+					<th>ID</th>
+					<!-- <th>Book ID</th> -->
+					<th>Title</th>
+					<th>Author</th>
+					<th>Course Code</th>
+					<th>Price</th>
+					<th>Qty.</th>
+					<th>Purchase</th>
+					<th colspan="2">Action</th>
+				</tr>
+				<tr th:each="books,H : ${list}" th:if="${books.HMC_Qty}">
+					<!-- 				<td th:text="${H.count}"></td> -->
+					<td th:text="${books.BookID}"></td>
+					<td th:text="${books.Title}"></td>
+					<td th:text="${books.Author}"></td>
+					<td th:text="${books.CourseCode}"></td>
+					<td th:text="${books.Price}"></td>
+					<td th:text="${books.HMC_Qty}"></td>
+					<td><span th:if="${books.HMC_Qty=='0'}" th:text="purchase"></span> <a href=""
+						th:if="${books.HMC_Qty!='0'}"
+						th:href="@{/Purchase/{BookID}/{Campus}/{Qty}(BookID=${books.BookID},Campus='HMC_Qty',Qty=${books.HMC_Qty})}">Purchase</a></td>
+					<td><a href="" th:href="@{/edit/{id}(id=${books.BookID})}">Edit</a></td>
+					<td><a href=""
+						th:href="@{/Delete/{BookID}/{Campus}(BookID=${books.BookID},Campus='HMC_Qty')}">Delete</a></td>
+				</tr>
+			</table>
+		</div>
+		<hr>
+		<h1>Oakville (Trafalgar) Campus Books availability</h1>
+		<div class="Main">
+			<table border="1">
+				<tr>
+					<th>ID</th>
+					<!-- 				<th>Book ID</th> -->
+					<th>Title</th>
+					<th>Author</th>
+					<th>Course Code</th>
+					<th>Price</th>
+					<th>Qty.</th>
+					<th>Purchase</th>
+					<th colspan="2">Action</th>
+				</tr>
+				<tr th:each="books,t : ${list}" th:if="${books.Traf_Qty}">
+					<!-- 				<td th:text="${t.index}"></td> -->
+					<td th:text="${books.BookID}"></td>
+					<td th:text="${books.Title}"></td>
+					<td th:text="${books.Author}"></td>
+					<td th:text="${books.CourseCode}"></td>
+					<td th:text="${books.Price}"></td>
+					<td th:text="${books.Traf_Qty}"></td>
+					<td><span th:if="${books.Traf_Qty=='0'}" th:text="purchase"></span> <a href=""
+						th:if="${books.Traf_Qty!='0'}"
+						th:href="@{/Purchase/{BookID}/{Campus}/{Qty}(BookID=${books.BookID},Campus='Traf_Qty',Qty=${books.Traf_Qty})}">Purchase</a></td>
+					<td><a href="" th:href="@{/edit/{id}(id=${books.BookID})}">Edit</a></td>
+					<td><a href=""
+						th:href="@{/Delete/{BookID}/{Campus}(BookID=${books.BookID},Campus='Traf_Qty')}">Delete</a></td>
+				</tr>
+			</table>
+		</div>
+	</div>
+
+</body>
+</html>

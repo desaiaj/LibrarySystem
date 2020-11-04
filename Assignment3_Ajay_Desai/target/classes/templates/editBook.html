@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+<link href="/static/style.css" type="text/css" rel="stylesheet" th:href="@{/style.css}" />
+<script type="text/javascript">
+window.addEventListener( "load", function () {
+if([[${list.Davis_Qty}]]!==false){
+	document.getElementById('Davis').style = "display: inline;";
+}
+if([[${list.HMC_Qty}]]!==false){
+	document.getElementById('HMC').style = "display: inline;";
+}
+if([[${list.Traf_Qty}]]!==false){
+	document.getElementById('Traf').style = "display: inline;";
+}	
+});
+	function Campus(c, v) {
+		if (v.checked) {
+			document.getElementById(c).style = "display: inline;";
+		} else {
+			document.getElementById(c).style = "display: none;";
+		}
+	}
+	</script>
+</head>
+<body>
+	<div>
+		<ul>
+			<li><a href="" th:href="@{/AddBook}">Add new Book</a></li>
+			<li><a href="" th:href="@{/ViewBooks?page=FullList}">View All Available Books</a></li>
+			<li><a href="" th:href="@{/ViewBooks}">Explore Book stores</a></li>
+			<li><a href="" th:href="@{/}">Search Books</a></li>
+		</ul>
+	</div>
+	<form action="/editRecord" method="get">
+		<div class="container" style="width: 100%">
+			<h1>Edit Book</h1>
+			<input type="hidden" name="BookID" th:value="${list.BookID}">
+			<label for="title">
+				<b> Book Title :</b>
+			</label>
+			<input type="text" placeholder="Enter Book Title" th:value="${list.Title}" name="title" required>
+			<label for="author">
+				<b> Author : </b>
+			</label>
+			<input type="text" placeholder="Enter Book Author" th:value="${list.Author}" name="author"
+				required>
+			<label for="price">
+				<b> Price :</b>
+			</label>
+			<input type="number" min="0" step="any" th:value="${list.Price}" placeholder="Enter Price of Book"
+				name="price" required>
+			<label for="CourseCode">
+				<b> Select/Insert Related Course</b>
+			</label>
+			<input type="text" th:value="${list.CourseCode}"
+				placeholder="Select/Insert Course Related to Book (, separated)" name="CourseCode"
+				list="Courses" />
+			<datalist id="Courses">
+				<option value="PROG32758">Enterprise Java Development</option>
+				<option value="PROG24178">Object Oriented Programming 2 - Java</option>
+				<option value="PROG10082">Object Oriented Programming 1 - Java</option>
+				<option value="INFO24178">Computer and Network Security</option>
+				<option value="SYST28951">Systems Development Methodologies</option>
+				<option value="SYST26671">Computer Architecture</option>
+				<option value="DBAS27198">Database Design and Implementation</option>
+				<option value="SYST10049">Web Development</option>
+				<option value="TELE13167">Introduction to Data Communications and Networking</option>
+				<option value="DBAS27198">Database Design and Implementation</option>
+				<option value="SYST10199">Web Programming</option>
+			</datalist>
+			<div style="margin-bottom: 22px;">
+				<label>
+					<b>Select Book Availability at Campus</b>
+				</label>
+				<label>
+					<input type="checkbox" value="true" onclick="Campus('Davis',this);" name="isDavis"
+						th:checked="${list.Davis_Qty}" checked="checked">
+					Davis (Brampton)
+				</label>
+				<label>
+					<input type="checkbox" value="true" onclick="Campus('HMC',this);" th:checked="${list.HMC_Qty}"
+						name="isHMC" checked="checked">
+					HMC (Mississauga)
+				</label>
+				<label>
+					<input type="checkbox" value="true" onclick="Campus('Traf',this);" name="isTraf"
+						th:checked="${list.Traf_Qty}" checked="checked">
+					Trafalgar (Oakville)
+				</label>
+			</div>
+			<div id="Davis" style="display: none">
+				<label for="davis_qty">
+					<b>Available Qty @ Davis Campus:</b>
+				</label>
+				<input type="number" min="0" placeholder="Enter available qty at Davis Campus"
+					th:value="${list.Davis_Qty}" name="davis_qty">
+			</div>
+			<div id="HMC" style="display: none">
+				<label for="hmc_qty">
+					<b>Available Qty @ HMC Campus:</b>
+				</label>
+				<input type="number" min="0" th:value="${list.HMC_Qty}"
+					placeholder="Enter available qty at HMC Campus" name="hmc_qty">
+			</div>
+			<div id="Traf" style="display: none">
+				<label for="traf_qty">
+					<b>Available Qty @ Trafalgar Campus:</b>
+				</label>
+				<input type="number" min="0" placeholder="Enter available qty at trafalgar Campus"
+					th:value="${list.Traf_Qty}" name="traf_qty">
+			</div>
+			<hr>
+			<input type="submit" value="Submit" class="registerbtn">
+		</div>
+	</form>
+	<!-- 	<a href="/View" th:href="@{/View}">view Books</a> -->
+</body>
+</html>
